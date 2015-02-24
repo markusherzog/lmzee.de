@@ -1,22 +1,9 @@
-body {
-    background: #efefef;
-    color: #333333;
-}
 h1 {
     text-transform: uppercase;
     font-weight: lighter;
 }
 
 h2 {
-    color: #424242;
-}
-
-.block1 {
-    background-color: #88bb33;
-    color: #efefef;
-}
-
-.block2 {
-    padding: 20px;
-    font-size: 1.5em;
+    text-transform: uppercase;
+    font-weight: lighter;
 }
