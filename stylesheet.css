@@ -1,0 +1,23 @@
+body {
+    background: #efefef;
+    color: #333333;
+}
+h1 {
+    text-transform: uppercase;
+    font-weight: lighter;
+    letter-spacing: 0.1em;
+    font-size: 2em;
+    font-style: italic;
+}
+
+h2 {
+    color: #424242;
+}
+
+.block {
+    width: 100%;
+    height: 500px;
+    background-color: #88bb33;
+    color: #ffffff;
+    padding: 20px;
+}
