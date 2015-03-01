@@ -1,9 +1,63 @@
-h1 {
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  position: relative;
+}
+
+h1, h2, h3 {
     text-transform: uppercase;
     font-weight: lighter;
+
 }
 
 h2 {
-    text-transform: uppercase;
+    color: #14C1D7;
+}
+
+.navbar {
+    background-color: #fff;
+    opacity: 0.9;
+}
+.navbar a {
+    color: #14C1D7;
+}
+.navbar .active {
+    background-color: #14C1D7;
+}
+.navbar .active a {
+    color: #fff;
+}
+.icon-bar {
+    background-color: #14C1D7;
+}
+
+.navbar.tiny {
+    background-color: #14C1D7;
+}
+.navbar.tiny a {
+    color: #fff;
+}
+.navbar.tiny .active {
+    background-color: #fff;
+}
+.navbar.tiny .active a {
+    color: #14C1D7;
+}
+.navbar.tiny .icon-bar {
+    background-color: #fff;
+}
+
+.jumbotron {
+    color: #fff;
+    background-color: #14C1D7;
+    margin-top: 50px;
+}
+
+
+
+.jumbotron p {
     font-weight: lighter;
+    letter-spacing: 0.04em;
+}
+.jumbotron .lead {
+    font-size: 2em;
 }
