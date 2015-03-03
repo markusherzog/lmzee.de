@@ -57,7 +57,7 @@
         </div>
     </div>
     
-    <div class="container">
+    <div class="container main">
         <div class="row">
             <div class="col-md-12" id="biography">
                 <h2>Biografie</h2>
@@ -74,37 +74,19 @@
 
         <div class="row">
             <div class="col-md-4">
-                <h2>Heading</h2>
+                <h3>Business-Englisch</h3>
                     <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn btn-default" href="#" role="button">Termine und Anmeldung &raquo;</a></p>
+                <p><button type="button" class="btn btn-default" data-toggle="modal" data-target="#dates_registration">Termine und Anmeldung &raquo;</button>
             </div>
             <div class="col-md-4">
-                <h2>Heading</h2>
+                <h3>Englisch für Juristen</h3>
                     <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                <p><button type="button" class="btn btn-default" data-toggle="modal" data-target="#dates_registration">Termine und Anmeldung &raquo;</button>
             </div>
             <div class="col-md-4">
-                <h2>Heading</h2>
+                <h3>Firmenschulungen</h3>
                     <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                <p><button type="button" class="btn btn-default" data-toggle="modal" data-target="#dates_registration">Termine und Anmeldung &raquo;</button>
             </div>
         </div>
 
@@ -130,6 +112,37 @@
         </div>
     </footer>
 
+
+    <div class="modal fade" id="dates_registration" tabindex="-1" role="dialog" aria-labelledby="dates and registration" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Termine</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Datum</th>
+                                <th>Anmeldefrist</th>
+                                <th>Ort</th>
+                                <th>Frei</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- gets populated by javascript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <!--<button type="button" class="btn btn-primary">Send message</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
@@ -137,6 +150,22 @@
         $(document).scroll(function() {
             $(".navbar").toggleClass("tiny",$(document). scrollTop() > 370);
         });
+
+        $.get('data.csv', function(data) {
+            var html;
+            var rows = data.split("\n");
+            rows.forEach( function getvalues(ourrow) {
+                html += "<tr>";
+                var columns = ourrow.split(",");
+                html += "<td>" + columns[0] + "</td>";
+                html += "<td>" + columns[1] + "</td>";
+                html += "<td>" + columns[2] + "</td>";
+                html += "<td>" + columns[3] + "</td>";
+                html += "</tr>";
+            })
+            $('.table tbody').append(html);     
+        });
+
     </script>
   </body>
 </html>
