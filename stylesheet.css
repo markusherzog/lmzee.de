@@ -6,11 +6,11 @@ body {
 h1, h2, h3 {
     text-transform: uppercase;
     font-weight: lighter;
-
 }
 
-h2 {
+h2, h3 {
     color: #14C1D7;
+    letter-spacing: 0.04em;
 }
 
 .navbar {
@@ -51,9 +51,6 @@ h2 {
     background-color: #14C1D7;
     margin-top: 50px;
 }
-
-
-
 .jumbotron p {
     font-weight: lighter;
     letter-spacing: 0.04em;
@@ -71,4 +68,8 @@ h2 {
 }
 .container p {
     margin: 20px 0;
+}
+
+.container.main {
+    padding-bottom: 70px;
 }
