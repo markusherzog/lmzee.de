@@ -35,7 +35,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#biography">Biografie <span class="sr-only">(current)</span></a></li>
                     <li><a href="#courses">Kurse</a></li>
-                    <li><a href="#translation">Dolmetschen</a></li>
+                    <li><a href="#dolmetschen">Dolmetschen</a></li>
                     <li><a href="#contact">Kontakt</a></li>
                 </ul>
             </div><!--/.navbar-collapse -->
@@ -58,15 +58,15 @@
     </div>
     
     <div class="container main">
-        <div class="row">
-            <div class="col-md-12" id="biography">
+        <div class="row" id="biography">
+            <div class="col-md-12">
                 <h2>Biografie</h2>
                 <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12" id="courses">
+        <div class="row" id="courses">
+            <div class="col-md-12">
                 <h2>Sprachkurse</h2>
                 <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
             </div>
@@ -90,15 +90,15 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12" id="translation">
+        <div class="row" id="dolmetschen">
+            <div class="col-md-12">
                 <h2>Dolmetschen</h2>
                 <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12" id="contact">
+        <div class="row" id="contact">
+            <div class="col-md-12">
                 <h2>Kontakt</h2>
                 <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
             </div>
@@ -118,26 +118,58 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel">Termine</h4>
+                    <h4 class="modal-title">Termine und Anmeldung</h4>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Datum</th>
-                                <th>Anmeldefrist</th>
-                                <th>Ort</th>
-                                <th>Frei</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- gets populated by javascript -->
-                        </tbody>
-                    </table>
+                    <form class="form-horizontal">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Datum</th>
+                                    <th>Anmeldefrist</th>
+                                    <th>Ort</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- gets populated by javascript -->
+                            </tbody>
+                        </table>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">Ihr Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Vorname Nachname">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="firma" class="col-sm-3 control-label">Firma (optional)</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="firma" name="firma" placeholder="Firma">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-3 control-label">Ihre E-Mail</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="E-Mail">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="anzahl" class="col-sm-3 control-label">Anzahl der Personen</label>
+                            <div class="col-sm-9">
+                                <input type="number" min="1" max="10" class="form-control" id="anzahl" name="anzahl" placeholder="Anzahl">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nachricht" class="col-sm-3 control-label">Bemerkung</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" rows="3" name="nachricht" id ="nachricht"></textarea>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <!--<button type="button" class="btn btn-primary">Send message</button>-->
+                    <p class="text-left">Nach dem Absenden Ihrer Anmeldung erhalten Sie eine E-Mail, in der die weiteren Schritte erklärt werde.</p>
+                    <button type="submit" class="btn btn-default">Anmelden</button>
                 </div>
             </div>
         </div>
@@ -157,10 +189,10 @@
             rows.forEach( function getvalues(ourrow) {
                 html += "<tr>";
                 var columns = ourrow.split(",");
+                html += "<td><input type='radio' name='datum' value='" + columns[0] + "' " + (columns[1] == "abgelaufen" ? "disabled" : "") + "></td>";
                 html += "<td>" + columns[0] + "</td>";
                 html += "<td>" + columns[1] + "</td>";
                 html += "<td>" + columns[2] + "</td>";
-                html += "<td>" + columns[3] + "</td>";
                 html += "</tr>";
             })
             $('.table tbody').append(html);     
