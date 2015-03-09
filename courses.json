@@ -1,0 +1,23 @@
+{
+    "firmenschulungen": {
+        "headline": "Firmenschulungen", 
+        "termine": [
+            {"datum": "1./2.März", "anmeldefrist": "2015-03-01", "ort": "Prenzlauer Berg"},
+            {"datum": "3./4.März", "anmeldefrist": "2015-03-10", "ort": "Kreuzberg"},
+            {"datum": "5./6.März", "anmeldefrist": "2015-03-20", "ort": "Friedrichshain"}
+        ]},
+    "business-englisch": {
+        "headline": "Busines Englisch",
+        "termine": [
+            {"datum": "1./2.April", "anmeldefrist": "2015-04-01", "ort": "Prenzlauer Berg"},
+            {"datum": "3./4.April", "anmeldefrist": "2015-04-01", "ort": "Kreuzberg"},
+            {"datum": "5./6.April", "anmeldefrist": "2015-04-01", "ort": "Friedrichshain"}
+        ]},
+    "englisch-fuer-juristen": {
+        "headline": "Englisch für Juristen",
+        "termine": [
+            {"datum": "1./2.Mai", "anmeldefrist": "2015-04-01", "ort": "Prenzlauer Berg"},
+            {"datum": "3./4.Mai", "anmeldefrist": "2015-04-01", "ort": "Kreuzberg"},
+            {"datum": "5./6.Mai", "anmeldefrist": "2015-04-01", "ort": "Friedrichshain"}
+        ]}
+}

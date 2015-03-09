@@ -76,17 +76,17 @@
             <div class="col-md-4">
                 <h3>Business-Englisch</h3>
                     <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><button type="button" class="btn btn-default" data-toggle="modal" data-target="#dates_registration">Termine und Anmeldung &raquo;</button>
+                <p><button type="button" class="btn btn-default" data-toggle="modal" data-target="#registration" data-course="business-englisch">Termine und Anmeldung &raquo;</button>
             </div>
             <div class="col-md-4">
                 <h3>Englisch für Juristen</h3>
                     <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><button type="button" class="btn btn-default" data-toggle="modal" data-target="#dates_registration">Termine und Anmeldung &raquo;</button>
+                <p><button type="button" class="btn btn-default" data-toggle="modal" data-target="#registration" data-course="englisch-fuer-juristen">Termine und Anmeldung &raquo;</button>
             </div>
             <div class="col-md-4">
                 <h3>Firmenschulungen</h3>
                     <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><button type="button" class="btn btn-default" data-toggle="modal" data-target="#dates_registration">Termine und Anmeldung &raquo;</button>
+                <p><button type="button" class="btn btn-default" data-toggle="modal" data-target="#registration" data-course="firmenschulungen">Termine und Anmeldung &raquo;</button>
             </div>
         </div>
 
@@ -113,7 +113,7 @@
     </footer>
 
 
-    <div class="modal fade" id="dates_registration" tabindex="-1" role="dialog" aria-labelledby="dates and registration" aria-hidden="true">
+    <div class="modal fade" id="registration" tabindex="-1" role="dialog" aria-labelledby="dates and registration" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -177,27 +177,42 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
+    <script src="moment-with-locales.min.js"></script>
     <script>
+
+
         $(document).scroll(function() {
             $(".navbar").toggleClass("tiny",$(document). scrollTop() > 370);
         });
 
-        $.get('data.csv', function(data) {
+        var data;
+        $.getJSON( "courses.json", function(json) {
+            data = json
+        });
+        moment.locale("de");
+        $('#registration').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var course = button.data('course') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            var headline = data[course].headline;
+            modal.find('.modal-title').text(headline)
             var html;
-            var rows = data.split("\n");
-            rows.forEach( function getvalues(ourrow) {
+            var rows = data[course].termine
+            rows.forEach( function getvalues(row) {
                 html += "<tr>";
-                var columns = ourrow.split(",");
-                html += "<td><input type='radio' name='datum' value='" + columns[0] + "' " + (columns[1] == "abgelaufen" ? "disabled" : "") + "></td>";
-                html += "<td>" + columns[0] + "</td>";
-                html += "<td>" + columns[1] + "</td>";
-                html += "<td>" + columns[2] + "</td>";
+                html += "<td><input type='radio' name='kurs' value='" + headline + " " + row["datum"] + "'></td>";
+                //+ "' " + (columns[1] == "abgelaufen" ? "disabled" : "") 
+                html += "<td>" + row["datum"] + "</td>";
+                html += "<td>" + moment(row["anmeldefrist"], "YYYY-MM-DD").format("D.MMMM") + "</td>";
+                html += "<td>" + row["ort"] + "</td>";
+
+
                 html += "</tr>";
             })
-            $('.table tbody').append(html);     
-        });
-
+            $('.table tbody').html(html);     
+        })
     </script>
   </body>
 </html>
