@@ -121,14 +121,14 @@
                     <h4 class="modal-title">Termine und Anmeldung</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal">
-                        <div class="form-group">
+                    <form class="form-horizontal" id="registration-form">
+                        <div class="form-group" id="form-group-termine">
                             <label class="col-sm-3 control-label">Termine</label>
                             <div class="radio col-sm-9" id="termine">
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" id="form-group-name">
                             <label for="name" class="col-sm-3 control-label">Ihr Name</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Vorname Nachname">
@@ -140,20 +140,20 @@
                                 <input type="text" class="form-control" id="firma" name="firma" placeholder="Firma">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="form-group-email">
                             <label for="email" class="col-sm-3 control-label">Ihre E-Mail</label>
                             <div class="col-sm-9">
                                 <input type="email" class="form-control" id="email" name="email" placeholder="E-Mail">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="form-group-anzahl">
                             <label for="anzahl" class="col-sm-3 control-label">Anzahl der Personen</label>
                             <div class="col-sm-9">
                                 <input type="number" min="1" max="10" class="form-control" id="anzahl" name="anzahl" placeholder="Anzahl">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="nachricht" class="col-sm-3 control-label">Bemerkung</label>
+                            <label for="nachricht" class="col-sm-3 control-label">Bemerkung (optional)</label>
                             <div class="col-sm-9">
                                 <textarea class="form-control" rows="3" name="nachricht" id ="nachricht"></textarea>
                             </div>
@@ -172,8 +172,6 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="moment-with-locales.min.js"></script>
     <script>
-
-
         $(document).scroll(function() {
             $(".navbar").toggleClass("tiny",$(document). scrollTop() > 370);
         });
@@ -183,7 +181,11 @@
             data = json
         });
         moment.locale("de");
-        $('#registration').on('show.bs.modal', function (event) {
+        $('button[type=submit]').on('click', function(event) {
+            $('#registration-form').submit();
+        }),
+        $('#registration').on('show.bs.modal', function(event) {
+            removeWarnings();
             var button = $(event.relatedTarget) // Button that triggered the modal
             var course = button.data('course') // Extract info from data-* attributes
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
@@ -199,12 +201,40 @@
                 var abgelaufen = frist.add(1, 'd').isBefore();
                 
                 $('#termine').append("<label><input type='radio' name='kurs' value='" + headline + " " + row["datum"] + "'" + (abgelaufen ? " disabled" : "") + "> " + row["datum"] + " in " + row["ort"] + (abgelaufen ? " - Anmeldefrist abgelaufen" : " - Anmeldung möglich bis " + frist.format("D.MMMM")) + "</label><br/>");
-                //html += "<td>" + (abgelaufen ? "abgelaufen" : frist.format("D.MMMM")) + "</td>";
-                //html += "<td>" + row["ort"] + "</td>";
-
             })
-              
-        })
+        });
+
+        $('#registration-form').on('submit', function(event) {
+            removeWarnings();
+            var hasErrors = false;
+            if(!$('input[name=kurs]:checked').val()) {
+                $('#form-group-termine').addClass('has-error');
+                hasErrors = true;
+            }
+            if(!$('input[name=name]').val()) {
+                $('#form-group-name').addClass('has-error');
+                hasErrors = true;
+            }
+            if(!$('input[name=email]').val()) {
+                $('#form-group-email').addClass('has-error');
+                hasErrors = true;
+            }
+            if(!$('input[name=anzahl]').val()) {
+                $('#form-group-anzahl').addClass('has-error');
+                hasErrors = true;
+            }
+
+            if(!hasErrors) {
+                console.log("formular ist ok");
+            }
+            event.preventDefault(); // Stop form from submitting normally
+        });
+
+        function removeWarnings() {
+            $.each($('#registration-form .has-error'), function(index, value) {
+                $(value).removeClass("has-error");
+            });
+        }
     </script>
   </body>
 </html>
