@@ -122,19 +122,12 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Datum</th>
-                                    <th>Anmeldefrist</th>
-                                    <th>Ort</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- gets populated by javascript -->
-                            </tbody>
-                        </table>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Termine</label>
+                            <div class="radio col-sm-9" id="termine">
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="name" class="col-sm-3 control-label">Ihr Name</label>
                             <div class="col-sm-9">
@@ -198,20 +191,19 @@
             var modal = $(this)
             var headline = data[course].headline;
             modal.find('.modal-title').text(headline)
-            var html;
+
             var rows = data[course].termine
+            $('#termine').empty();
             rows.forEach( function getvalues(row) {
-                html += "<tr>";
-                html += "<td><input type='radio' name='kurs' value='" + headline + " " + row["datum"] + "'></td>";
-                //+ "' " + (columns[1] == "abgelaufen" ? "disabled" : "") 
-                html += "<td>" + row["datum"] + "</td>";
-                html += "<td>" + moment(row["anmeldefrist"], "YYYY-MM-DD").format("D.MMMM") + "</td>";
-                html += "<td>" + row["ort"] + "</td>";
+                var frist = moment(row["anmeldefrist"], "YYYY-MM-DD");
+                var abgelaufen = frist.add(1, 'd').isBefore();
+                
+                $('#termine').append("<label><input type='radio' name='kurs' value='" + headline + " " + row["datum"] + "'" + (abgelaufen ? " disabled" : "") + "> " + row["datum"] + " in " + row["ort"] + (abgelaufen ? " - Anmeldefrist abgelaufen" : " - Anmeldung möglich bis " + frist.format("D.MMMM")) + "</label><br/>");
+                //html += "<td>" + (abgelaufen ? "abgelaufen" : frist.format("D.MMMM")) + "</td>";
+                //html += "<td>" + row["ort"] + "</td>";
 
-
-                html += "</tr>";
             })
-            $('.table tbody').html(html);     
+              
         })
     </script>
   </body>

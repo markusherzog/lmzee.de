@@ -2,9 +2,9 @@
     "firmenschulungen": {
         "headline": "Firmenschulungen", 
         "termine": [
-            {"datum": "1./2.März", "anmeldefrist": "2015-03-01", "ort": "Prenzlauer Berg"},
-            {"datum": "3./4.März", "anmeldefrist": "2015-03-10", "ort": "Kreuzberg"},
-            {"datum": "5./6.März", "anmeldefrist": "2015-03-20", "ort": "Friedrichshain"}
+            {"datum": "1./2.März", "anmeldefrist": "2015-03-01", "ort": "Prenzlauer Berg, Schönhauser Allee 123"},
+            {"datum": "3./4.März", "anmeldefrist": "2015-03-09", "ort": "Kreuzberg"},
+            {"datum": "5./6.März", "anmeldefrist": "2015-03-10", "ort": "Friedrichshain"}
         ]},
     "business-englisch": {
         "headline": "Busines Englisch",
